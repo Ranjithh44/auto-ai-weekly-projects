@@ -21,9 +21,9 @@ folder = f"{today}-{project_title}"
 os.makedirs(folder, exist_ok=True)
 
 with open(f"{folder}/README.md", "w") as f:
-    f.write(f"# {project_title.replace('-', ' ').title()}\n\n{description}")
-
-{description}")
+    f.write(
+        f"# {project_title.replace('-', ' ').title()}\n\n{description}"
+    )
 
 code_response = openai.ChatCompletion.create(
   model="gpt-4",
