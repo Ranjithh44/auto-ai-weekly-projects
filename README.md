@@ -1,0 +1,1 @@
+# auto-ai-weekly-projects
