@@ -7,16 +7,20 @@ client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Step 1: Generate project idea
 idea_response = client.chat.completions.create(
-    model="gpt-4",
+    model="gpt-3.5-turbo",
     messages=[
         {"role": "system", "content": "You are an AI that creates small, interesting beginner-level Python projects."},
         {"role": "user", "content": "Give me a unique and creative Python project idea with a one-line description."}
     ]
 )
 
-idea = idea_response.choices[0].message.content.strip()
-project_title = idea.split(":")[0].strip().replace(" ", "-").lower()
-description = idea.split(":", 1)[1].strip()
+idea_response = client.chat.completions.create(
+    model="gpt-3.5-turbo",  # Use gpt-3.5 instead of gpt-4
+    messages=[
+        {"role": "system", "content": "You are an AI that creates small, interesting beginner-level Python projects."},
+        {"role": "user", "content": "Give me a unique and creative Python project idea with a one-line description."}
+    ]
+)
 
 # Step 2: Create folder
 today = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -29,7 +33,7 @@ with open(f"{folder}/README.md", "w") as f:
 
 # Step 4: Generate starter code
 code_response = client.chat.completions.create(
-    model="gpt-4",
+    model="gpt-3.5-turbo",
     messages=[
         {"role": "user", "content": f"Write starter Python code for this project: {description}"}
     ]
